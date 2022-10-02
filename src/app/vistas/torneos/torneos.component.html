@@ -1,0 +1,8 @@
+<app-top-nav></app-top-nav>
+<section class="torneos">
+    <article class="torneo" *ngFor="let torneo of torneos">
+        <div>{{torneo.torneo}}</div>
+        <hr>
+        <div *ngFor="let partido of torneo.partidos">Partido {{partido}}</div>
+    </article>
+</section>

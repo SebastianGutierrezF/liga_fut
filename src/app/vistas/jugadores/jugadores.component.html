@@ -1,0 +1,21 @@
+<app-top-nav></app-top-nav>
+<section class="jugadores">
+    <article class="listaJ">
+        <img src="team logo.jpg" alt="">
+        <form>
+            <div>
+                <input type="text" placeholder="Nombre">
+            </div>
+            <div>
+                <input type="text" placeholder="Apellido">
+            </div>
+            <button>Agregar</button>
+        </form>
+    </article>
+    <article class="listaJ" *ngFor="let equipo of equiposJugadores">
+        <img [src]="equipo.logo" alt="">
+        <h1>{{equipo.nombre}}</h1>
+        <div class="jugador" *ngFor="let jugador of equipo.jugadores">{{jugador}}</div>
+        <div class="boton-agregar"><span class="material-symbols-outlined">add</span></div>
+    </article>
+</section>

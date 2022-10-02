@@ -1,0 +1,11 @@
+<app-top-nav></app-top-nav>
+<section class="partidos">
+    <article class="partido" *ngFor="let partido of partidos">
+        <div class="partidoHeader"><img [src]="partido.logo1" alt="">VS.<img [src]="partido.logo2" alt=""></div>
+        <hr>
+        <div>{{partido.fecha}}</div>
+        <div>
+            <span class="material-symbols-outlined">edit</span>
+        </div>
+    </article>
+</section>

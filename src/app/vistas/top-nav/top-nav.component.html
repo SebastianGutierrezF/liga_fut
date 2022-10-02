@@ -1,0 +1,16 @@
+<nav class="nav">
+    <button class="menu" (click)="toggleNav()">|||</button>
+    <h1>Liga Futbol</h1>
+    <div class="profile">
+        <span class="material-symbols-outlined">account_circle</span>
+    </div>
+    <div class="dropdown" *ngIf="showNav">
+        <ul class="navItems">
+            <li><a routerLink="/equipos">Equipos</a></li>
+            <li><a routerLink="/jugadores">Jugadores</a></li>
+            <li><a routerLink="/partidos">Partidos</a></li>
+            <li><a routerLink="/torneos">Torneos</a></li>
+            <li><a routerLink="/arbitros">Arbitros</a></li>
+        </ul>
+    </div>
+</nav>

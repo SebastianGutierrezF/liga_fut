@@ -1,0 +1,23 @@
+<app-top-nav></app-top-nav>
+<section class="arbitros">
+    <table id="arbitrosLista">
+        <tr>
+            <th>Nombre</th>
+            <th>Apellidos</th>
+            <th>Contacto</th>
+            <th>Email</th>
+            <th>Colocacion</th>
+        </tr>
+        <tr *ngFor="let arbitro of arbitros">
+            <td>{{arbitro.nombre}}</td>
+            <td>{{arbitro.apellidos}}</td>
+            <td>{{arbitro.contacto}}</td>
+            <td>{{arbitro.email}}</td>
+            <td>{{arbitro.colocacion}}</td>
+        </tr>
+    </table>
+    <div class="arbitrosImg">
+        <img src="assets/cancha.jpg" alt="" width="250px">
+        <div class="pos"></div>
+    </div>
+</section>
