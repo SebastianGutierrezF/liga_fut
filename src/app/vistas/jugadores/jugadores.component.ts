@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Jugador } from 'src/app/interfaces/jugador';
+import { JugadorObj } from 'src/app/interfaces/jugador-obj';
 import { ConexionService } from 'src/app/services/conexion.service';
 
 @Component({
@@ -7,13 +9,17 @@ import { ConexionService } from 'src/app/services/conexion.service';
   styleUrls: ['./jugadores.component.css']
 })
 export class JugadoresComponent implements OnInit {
-  equiposJugadores = [
-    {nombre: "", logo: "", jugadores: ["Messi", "Ronaldiño"]},
-  ];
+  equiposJugadores: JugadorObj[] = [];
 
   constructor(private cs: ConexionService) {
-    this.cs.get('jugadores', 'getJugadores').subscribe((dato: any) => {
-      this.equiposJugadores = dato;
+    this.cs.get('jugadores', 'getJugadores').subscribe((datos: any) => {
+      datos.forEach((dato: Jugador) => {
+        let obj: JugadorObj = {equipo: dato.equipo, logo: dato.logo, jugadores: []}
+        dato.jugadores.split(',').forEach((jugador: string) => {
+          obj.jugadores.push(jugador);
+        })
+        this.equiposJugadores.push(obj);
+      });
     })
   }
 

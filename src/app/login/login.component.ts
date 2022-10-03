@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ConexionService } from '../services/conexion.service';
 
 @Component({
   selector: 'app-login',
@@ -7,14 +8,18 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  pass = "";
+  email = "";
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private cs: ConexionService) { }
 
   ngOnInit(): void {
   }
 
-
   login() {
-    this.router.navigate(['/inicio']);
+    this.cs.post('usuario', 'login', {email: this.email, pass: this.pass}).subscribe((dato: any) => {
+      localStorage.setItem('logged', dato);
+      this.router.navigate(['/inicio']);
+    });
   }
 }

@@ -1,9 +1,11 @@
 <app-top-nav></app-top-nav>
+<h1 class="title">Partidos</h1>
 <section class="partidos">
     <article class="partido" *ngFor="let partido of partidos">
-        <div class="partidoHeader"><img [src]="partido.logo1" alt="">VS.<img [src]="partido.logo2" alt=""></div>
+        <div class="partidoHeader"><img [src]="'data:image/png;base64,' + partido.logo1" alt="">   VS.   <img [src]="'data:image/png;base64,' + partido.logo2" alt=""></div>
         <hr>
-        <div>{{partido.fecha}}</div>
+        <div>Arbitro: {{partido.arbitro}}</div>
+        <div>Fecha: {{partido.fecha}}</div>
         <div>
             <span class="material-symbols-outlined">edit</span>
         </div>

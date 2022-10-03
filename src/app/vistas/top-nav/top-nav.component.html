@@ -1,8 +1,10 @@
 <nav class="nav">
-    <button class="menu" (click)="toggleNav()">|||</button>
-    <h1>Liga Futbol</h1>
+    <button class="menu" (click)="toggleNav()"><span class="material-symbols-outlined">menu</span></button>
+    <img src="../../../assets/football logo.png" alt="" height="100%" routerLink="/inicio">
     <div class="profile">
-        <span class="material-symbols-outlined">account_circle</span>
+        <a (click)="logout()" style="cursor: pointer;">
+            <span class="material-symbols-outlined">logout</span>
+        </a>
     </div>
     <div class="dropdown" *ngIf="showNav">
         <ul class="navItems">

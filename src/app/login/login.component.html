@@ -1,2 +1,11 @@
-<p>login works!</p>
-<button (click)="login()">LOGIN</button>
+<img src="../../assets/banner inicio.jpg" alt="" class="loginImg">
+<section class="login">
+    <form class="loginForm">
+        <h1>Iniciar sesión</h1>
+        <label for="email">Correo electrónico</label>
+        <input type="text" [(ngModel)]="email" name="email">
+        <label for="pass">Contraseña</label>
+        <input type="password" [(ngModel)]="pass" name="pass">
+        <button type="button" (click)="login()" (keyup.enter)="login()">LOGIN</button>
+    </form>
+</section>

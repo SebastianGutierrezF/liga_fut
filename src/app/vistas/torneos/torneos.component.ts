@@ -12,11 +12,10 @@ export class TorneosComponent implements OnInit {
   torneos: TorneoObj[] = [];
 
   constructor(private cs: ConexionService) {
-    // this.torneos.pop();
     this.cs.get('torneos', 'getTorneos').subscribe((datos: any) => {
       datos.forEach((dato: Torneo) => {
         let obj: TorneoObj = {torneo: dato.torneo, partidos: []};
-        dato.partidos.split(', ').forEach((partido: string) => {
+        dato.partidos.split(',').forEach((partido: string) => {
           obj.partidos.push(partido);
         })
         this.torneos.push(obj);

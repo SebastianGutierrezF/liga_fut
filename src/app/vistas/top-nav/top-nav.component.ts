@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-top-nav',
@@ -8,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 export class TopNavComponent implements OnInit {
   showNav = false;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -17,5 +18,10 @@ export class TopNavComponent implements OnInit {
   toggleNav() {
     if (this.showNav) this.showNav = false;
     else this.showNav = true;
+  }
+
+  logout() {
+    localStorage.removeItem('logged');
+    this.router.navigate(['/login']);
   }
 }

@@ -1,4 +1,5 @@
 <app-top-nav></app-top-nav>
+<h1 class="title">Arbitros</h1>
 <section class="arbitros">
     <table id="arbitrosLista">
         <tr>
@@ -9,11 +10,11 @@
             <th>Colocacion</th>
         </tr>
         <tr *ngFor="let arbitro of arbitros">
-            <td>{{arbitro.nombre}}</td>
-            <td>{{arbitro.apellidos}}</td>
-            <td>{{arbitro.contacto}}</td>
-            <td>{{arbitro.email}}</td>
-            <td>{{arbitro.colocacion}}</td>
+            <td>{{arbitro.nombre_a}}</td>
+            <td>{{arbitro.apellidos_a}}</td>
+            <td>{{arbitro.contacto_a}}</td>
+            <td>{{arbitro.email_a}}</td>
+            <td>{{arbitro.colocacion_a}}</td>
         </tr>
     </table>
     <div class="arbitrosImg">
