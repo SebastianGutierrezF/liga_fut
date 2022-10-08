@@ -9,6 +9,7 @@ import { PartidosComponent } from './partidos/partidos.component';
 import { TopNavComponent } from './top-nav/top-nav.component';
 import { TorneosComponent } from './torneos/torneos.component';
 import { VistasComponent } from './vistas.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { VistasComponent } from './vistas.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
 })
 export class VistasModule { }

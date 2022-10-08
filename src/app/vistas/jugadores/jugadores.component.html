@@ -3,21 +3,33 @@
 <section class="jugadores">
     <article class="listaJ">
         <h1>Agregar jugador</h1>
+        <br>
         <hr>
-        <form>
+        <br>
+        <form [formGroup]="formulario">
             <div>
-                <input type="text" placeholder="Nombre">
+                <input type="text" placeholder="Nombre" formControlName="nombre_j">
             </div>
             <div>
-                <input type="text" placeholder="Apellido">
+                <input type="text" placeholder="Apellidos" formControlName="apellidos_j">
             </div>
-            <button>Agregar</button>
+            <div>
+                <label for="fechan">Fecha de nacimiento</label>
+                <input type="date" id="fechan" formControlName="fechan_j">
+            </div>
+            <div>
+                <label for="equipo">Equipo</label>
+                <select name="equipo" id="equipo">
+                    <option *ngFor="let equipo of equiposJugadores">{{equipo.equipo}}</option>
+                </select>
+            </div>
+            <button class="sendButton">Agregar</button>
         </form>
     </article>
     <article class="listaJ" *ngFor="let equipo of equiposJugadores">
-        <img [src]="'data:image/png;base64,' + equipo.logo" alt="">
+        <img [src]="equipo.logo" alt="">
         <h1>{{equipo.equipo}}</h1>
         <div class="jugador" *ngFor="let jugador of equipo.jugadores">{{jugador}}</div>
-        <div class="boton-agregar"><span class="material-symbols-outlined">add</span></div>
     </article>
 </section>
+<section>

@@ -1,12 +1,28 @@
 <app-top-nav></app-top-nav>
 <h1 class="title">Equipos</h1>
 <section class="equipos">
-    <article class="equipo">
-        <button><span class="material-symbols-outlined">add</span></button>
-        <h3>Agregar equipo</h3>
-    </article>
     <article *ngFor="let equipo of equipos" class="equipo">
-        <img [src]="'data:image/png;base64,' + equipo.logo" alt="">
-        <h3>{{equipo.equipo}}</h3>
+        <img [src]="equipo.logo_e" alt="">
+        <h3>{{equipo.nombre_e}}</h3>
+        <button (click)="parcharValores(equipo)"><span class="material-symbols-outlined">edit</span></button>
+        <button (click)="borrarEquipo(equipo.id_e, equipo.nombre_e)"><span class="material-symbols-outlined">delete</span></button>
     </article>
+</section>
+<hr>
+<br>
+<h3>Agregar o editar equipos</h3>
+<section>
+    <form [formGroup]="formulario" class="form">
+        <div>
+            <label for="nombre">Nombre</label>
+            <br>
+            <input type="text" formControlName="nombre_e" id="nombre">
+        </div>
+        <div>
+            <label for="logo">Logo</label>
+            <br>
+            <input type="file" id="logo" (change)="leerArchivo($event)">
+        </div>
+        <button type="button" class="sendButton" id="sendButton" (click)="enviarDatos()">Agregar</button>
+    </form>
 </section>

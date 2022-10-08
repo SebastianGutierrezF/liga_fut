@@ -107,6 +107,7 @@ button {
     justify-content: space-around;
     box-sizing: border-box;
     align-items: center;
+    gap: 10px;
 }
 
 .jugadores article img {
@@ -331,7 +332,39 @@ table, th, td {
     border-radius: 5px;
 }
 
+.sendButton {
+    background: orange;
+    color: white;
+    border: none;
+    padding: 10px;
+    width: 100px;
+    margin: auto;
+    transition: 0.3s;
+    border-radius: 5px;
+}
+
+.sendButton:hover {
+    transform: scale(1.1);
+    border-radius: 20px;
+}
+
 .loginForm button:hover {
     transform: scale(1.1);
     border-radius: 20px;
+}
+
+.form {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    gap: 10px;
+    border-radius: 15px;
+    border: gray solid 1px;
+    width: 400px;
+    padding: 10px;
+    margin: 0px auto;
+}
+
+h3 {
+    margin-left: 10px;
 }

@@ -18,7 +18,7 @@ import { VistasModule } from './vistas/vistas.module';
     AppRoutingModule,
     VistasModule,
     HttpClientModule,
-    FormsModule
+    FormsModule    
   ],
   providers: [],
   bootstrap: [AppComponent]

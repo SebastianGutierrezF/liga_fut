@@ -8,6 +8,7 @@
             <th>Contacto</th>
             <th>Email</th>
             <th>Colocacion</th>
+            <th>Editar</th>
         </tr>
         <tr *ngFor="let arbitro of arbitros">
             <td>{{arbitro.nombre_a}}</td>
@@ -15,10 +16,46 @@
             <td>{{arbitro.contacto_a}}</td>
             <td>{{arbitro.email_a}}</td>
             <td>{{arbitro.colocacion_a}}</td>
+            <td><button (click)="parcharValores(arbitro)"><span class="material-symbols-outlined">edit</span></button>
+                <button (click)="borrarArbitro(arbitro.id_a, arbitro.nombre_a)"><span class="material-symbols-outlined">delete</span></button>
+            </td>
         </tr>
     </table>
     <div class="arbitrosImg">
         <img src="assets/cancha.jpg" alt="" width="250px">
         <div class="pos"></div>
     </div>
+</section>
+<hr>
+<br>
+<h3>Agregar o editar arbitros</h3>
+<section>
+    <form [formGroup]="formulario" class="form">
+        <div>
+            <label for="nombre">Nombre</label>
+            <br>
+            <input type="text" formControlName="nombre_a" id="nombre">
+        </div>
+        <div>
+            <label for="apellidos">Apellidos</label>
+            <br>
+            <input type="text" formControlName="apellidos_a" id="apellidos">
+        </div>
+        <div>
+            <label for="contacto">Contacto</label>
+            <br>
+            <input type="text" formControlName="contacto_a" id="contacto">
+        </div>
+        <div>
+            <label for="email">Email</label>
+            <br>
+            <input type="text" formControlName="email_a" id="email">
+        </div>
+        <div>
+            <label for="colocacion">Colocacion</label>
+            <br>
+            <input type="text" formControlName="colocacion_a" id="colocacion">
+        </div>
+        <button type="button" class="sendButton" id="sendButton" (click)="enviarDatos()">Agregar</button>
+    </form>
 </section>
