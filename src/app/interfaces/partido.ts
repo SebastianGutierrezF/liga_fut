@@ -1,5 +1,9 @@
 export interface Partido {
-    logo:string,
+    id_p: string,
+    logos: string,
+    equipos: string,
     fecha: string,
-    arbitro: string
+    hora: string,
+    arbitro: string,
+    id_a: string
 }

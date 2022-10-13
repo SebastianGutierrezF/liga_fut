@@ -1,11 +1,13 @@
 <img src="../../assets/banner inicio.jpg" alt="" class="loginImg">
 <section class="login">
-    <form class="loginForm">
+    <form class="loginForm" [formGroup]="form">
         <h1>Iniciar sesión</h1>
         <label for="email">Correo electrónico</label>
-        <input type="text" [(ngModel)]="email" name="email">
+        <input type="text" formControlName="email" name="email">
+        <p class="error" *ngIf="notValid('email')">Ingresa un email</p>
         <label for="pass">Contraseña</label>
-        <input type="password" [(ngModel)]="pass" name="pass">
-        <button type="button" (click)="login()" (keyup.enter)="login()">LOGIN</button>
+        <input type="password" formControlName="pass" name="pass">
+        <p class="error" *ngIf="notValid('pass')">Ingresa una contraseña</p>
+        <button type="button" [disabled]="form.invalid" (click)="login()" (keyup.enter)="login()">LOGIN</button>
     </form>
 </section>

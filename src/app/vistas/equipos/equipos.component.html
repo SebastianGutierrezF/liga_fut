@@ -1,7 +1,7 @@
 <app-top-nav></app-top-nav>
 <h1 class="title">Equipos</h1>
 <section class="equipos">
-    <article *ngFor="let equipo of equipos" class="equipo">
+    <article *ngFor="let equipo of equipos" class="equipo card">
         <img [src]="equipo.logo_e" alt="">
         <h3>{{equipo.nombre_e}}</h3>
         <button (click)="parcharValores(equipo)"><span class="material-symbols-outlined">edit</span></button>
@@ -17,11 +17,13 @@
             <label for="nombre">Nombre</label>
             <br>
             <input type="text" formControlName="nombre_e" id="nombre">
+            <p class="error" *ngIf="notValid('nombre_e')">Falta agregar el nombre del equipo</p>
         </div>
         <div>
             <label for="logo">Logo</label>
             <br>
-            <input type="file" id="logo" (change)="leerArchivo($event)">
+            <input type="file" id="logo" #logo (change)="leerArchivo($event)">
+            <p class="error" *ngIf="notValid('logo_e')">Falta agregar el logo del equipo</p>
         </div>
         <button type="button" class="sendButton" id="sendButton" (click)="enviarDatos()">Agregar</button>
     </form>

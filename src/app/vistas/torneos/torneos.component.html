@@ -1,9 +1,70 @@
 <app-top-nav></app-top-nav>
 <h1 class="title">Torneos</h1>
+<form [formGroup]="formulario" class="formTorneo">
+    <div>
+        <label for="nombre">Nombre</label>
+        <input type="text" id="nombre" formControlName="nombre">
+        <p class="error" *ngIf="notValid('nombre')"><small>Falta el nombre del torneo</small></p>
+    </div>
+    <div>
+        <label for="fechain_t">Fecha de inicio</label>
+        <input type="date" id="fechain_t" formControlName="fechain_t">
+        <p class="error" *ngIf="notValid('fechain_t')"><small>Falta la fecha de inicio</small></p>
+    </div>
+    <div>
+        <label for="fechafin_t">Fecha de fin</label>
+        <input type="date" id="fechafin_t" formControlName="fechafin_t">
+        <p class="error" *ngIf="notValid('fechafin_t')"><small>Falta la fecha de fin</small></p>
+    </div>
+    <div id="selectPartido">
+        <label for="partido">Partido</label>
+        <select name="partido" id="partido" formControlName="id_p">
+            <option [value]="partido.id_p" *ngFor="let partido of partidos">{{partido.nEquipos}}</option>
+        </select>
+    </div>
+    <button type="button" id="agregarEditar" (click)="enviarDatos()" [disabled]="this.formulario.invalid" class="sendButton">Agregar</button>
+</form>
+<hr>
 <section class="torneos">
-    <article class="torneo" *ngFor="let torneo of torneos">
-        <div>{{torneo.torneo}}</div>
-        <hr>
-        <div *ngFor="let partido of torneo.partidos">Partido {{partido}}</div>
+    <article class="torenoContainer">
+        <div class="torneo card" *ngFor="let torneo of torneos">
+            <div>
+                {{torneo.nombre}}
+                <button (click)="parcharValores(torneo)"><span class="material-symbols-outlined">edit</span></button>
+                <button type="button" (click)="borrarTorneo(torneo.id_t)"><span class="material-symbols-outlined">delete</span></button>
+            </div>
+            <div>Fecha inicio: {{torneo.fechain_t}}</div>
+            <div>Fecha fin: {{torneo.fechain_t}}</div>
+            <button type="button" class="inscritosButton" (click)="verInscritos(torneo.id_t, torneo.nombre)">
+                <span class="material-symbols-outlined">
+                chevron_right
+                </span>
+            </button>
+        </div>
+    </article>
+    <article class="inscritos">
+        <h1 id="inscritos">Inscritos</h1>
+        <div *ngFor="let inscrito of inscritos">
+            {{inscrito.nEquipos}}
+            <button type="button" (click)="quitarInscrito(inscrito.id_p, inscrito.id_t)">
+                <span class="material-symbols-outlined">
+                    playlist_remove
+                    </span>
+            </button>
+            <hr>
+        </div>
+        <form [formGroup]="formInscritos" *ngIf="inscritosForm">
+            <div>
+                <select name="inscrito" id="inscrito" formControlName="id_p">
+                    <option [value]="partido.id_p" *ngFor="let partido of partidos">{{partido.nEquipos}}</option>
+                </select>
+                <button type="button" [disabled]="this.formInscritos.invalid" (click)="agregarInscrito()">
+                    <span class="material-symbols-outlined">
+                        format_list_bulleted_add
+                    </span>
+                </button>
+                <p class="error" *ngIf="(this.formInscritos.touched && this.formInscritos.invalid)"><small>No hay equipos disponibles</small></p>
+            </div>
+        </form>
     </article>
 </section>

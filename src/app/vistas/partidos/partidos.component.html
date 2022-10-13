@@ -1,13 +1,56 @@
 <app-top-nav></app-top-nav>
 <h1 class="title">Partidos</h1>
 <section class="partidos">
-    <article class="partido" *ngFor="let partido of partidos">
+    <article class="partido">
+        <form [formGroup]="formulario" class="partidoForm">
+            <div>
+                <label for="equipo1">Equipo 1</label>
+                <select name="equipo1" id="equipo1" formControlName="id_e1">
+                    <option [value]="equipo.id_e" *ngFor="let equipo of equipos">{{equipo.nombre_e}}</option>
+                </select>
+                <p class="error" *ngIf="notValid('id_e1')"><small>Debes agregar un equipo</small></p>
+            </div>
+            <div>
+                <label for="equipo2">Equipo 2</label>
+                <select name="equipo2" id="equipo2" formControlName="id_e2">
+                    <option [value]="equipo.id_e" *ngFor="let equipo of equipos">{{equipo.nombre_e}}</option>
+                </select>
+                <p class="error" *ngIf="notValid('id_e2')"><small>Debes agregar un equipo</small></p>
+            </div>
+            <div>
+                <label for="fecha">Fecha del partido</label>
+                <input type="date" id="fecha" formControlName="fecha">
+                <p class="error" *ngIf="notValid('fecha')"><small>Agregar la fecha del partido</small></p>
+            </div>
+            <div>
+                <label for="hora">Hora del partido</label>
+                <input type="time" id="hora" formControlName="hora">
+                <p class="error" *ngIf="notValid('hora')"><small>Agregar la hora del partido</small></p>
+            </div>
+            <div>
+                <label for="Arbitro">Arbitro</label>
+                <select name="arbitro" id="arbitro" formControlName="id_a">
+                    <option [value]="arbitro.id_a" *ngFor="let arbitro of arbitros">{{arbitro.nombre_a}} {{arbitro.apellidos_a}}</option>
+                </select>
+                <p class="error" *ngIf="notValid('id_a')"><small>Agregar el arbitro del partido</small></p>
+            </div>
+            <div>
+                <button class="sendButton" type="button" id="agregarEditar" [disabled]="!formulario.valid" (click)="enviarDatos()">Agregar</button>
+            </div>
+        </form>
+    </article>
+    <article class="partido card" *ngFor="let partido of partidos">
         <div class="partidoHeader"><img [src]="'data:image/png;base64,' + partido.logo1" alt="">   VS.   <img [src]="'data:image/png;base64,' + partido.logo2" alt=""></div>
         <hr>
+        <div><strong>Fecha: {{partido.fecha}}</strong></div>
         <div>Arbitro: {{partido.arbitro}}</div>
-        <div>Fecha: {{partido.fecha}}</div>
         <div>
-            <span class="material-symbols-outlined">edit</span>
+            <button type="button" id="agregarEditar" (click)="parcharValores(partido)">
+                <span class="material-symbols-outlined">edit</span>
+            </button>
+            <button (click)="borrarPartido(partido.id_p)">
+                <span class="material-symbols-outlined">delete</span>
+            </button>
         </div>
     </article>
 </section>

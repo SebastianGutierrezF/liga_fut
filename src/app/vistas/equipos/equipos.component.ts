@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Equipo } from 'src/app/interfaces/equipo';
 import { ConexionService } from 'src/app/services/conexion.service';
@@ -9,6 +9,7 @@ import { ConexionService } from 'src/app/services/conexion.service';
   styleUrls: ['./equipos.component.css']
 })
 export class EquiposComponent implements OnInit {
+  @ViewChild("logo", {static: false}) logoInput: ElementRef | undefined;
   equipos: Equipo[] = [];
   formulario: FormGroup = this.fb.group({
     id_e: [,],
@@ -37,6 +38,10 @@ export class EquiposComponent implements OnInit {
     }
   }
 
+  notValid(campo: string) {
+    return this.formulario.touched && this.formulario.controls[campo].invalid;
+  }
+
   leerArchivo(event: any) {
     let reader = new FileReader();
     if (event.target.files && event.target.files.length) {
@@ -56,6 +61,7 @@ export class EquiposComponent implements OnInit {
         alert(`Equipo ${this.formulario.controls['nombre_e'].value} ha sido agregado.`);
         this.formulario.reset();
         this.update();
+        this.logoInput!.nativeElement.value = '';
       } else {
         alert(`Ocurrio un error al agregar el equipo.`);
       }
@@ -68,13 +74,11 @@ export class EquiposComponent implements OnInit {
         alert(`Equipo ${this.formulario.controls['nombre_e'].value} ha sido editado.`);
         this.formulario.reset();
         this.update();
-        const boton = document.getElementById('sendButton');
-        boton!.textContent = "Agregar";
+        document.getElementById('sendButton')!.textContent = "Agregar";
       } else {
         alert(`Ocurrio un error al editar el equipo.`)
       }
     })
-
   }
 
   borrarEquipo(id: string, nombre: string) {
@@ -90,8 +94,8 @@ export class EquiposComponent implements OnInit {
 
   parcharValores(equipo: Equipo) {
     this.formulario.patchValue(equipo);
-    const boton = document.getElementById('sendButton');
-    boton!.textContent = "Editar";
+    this.logoInput!.nativeElement.value = '';
+    document.getElementById('sendButton')!.textContent = "Editar";
   }
 
 }

@@ -1,35 +1,42 @@
 <app-top-nav></app-top-nav>
 <h1 class="title">Jugadores</h1>
 <section class="jugadores">
-    <article class="listaJ">
-        <h1>Agregar jugador</h1>
-        <br>
-        <hr>
-        <br>
-        <form [formGroup]="formulario">
-            <div>
-                <input type="text" placeholder="Nombre" formControlName="nombre_j">
-            </div>
-            <div>
-                <input type="text" placeholder="Apellidos" formControlName="apellidos_j">
-            </div>
-            <div>
-                <label for="fechan">Fecha de nacimiento</label>
-                <input type="date" id="fechan" formControlName="fechan_j">
-            </div>
-            <div>
-                <label for="equipo">Equipo</label>
-                <select name="equipo" id="equipo">
-                    <option *ngFor="let equipo of equiposJugadores">{{equipo.equipo}}</option>
-                </select>
-            </div>
-            <button class="sendButton">Agregar</button>
-        </form>
-    </article>
-    <article class="listaJ" *ngFor="let equipo of equiposJugadores">
+    <article class="listaJ card" *ngFor="let equipo of equiposJugadores">
         <img [src]="equipo.logo" alt="">
         <h1>{{equipo.equipo}}</h1>
-        <div class="jugador" *ngFor="let jugador of equipo.jugadores">{{jugador}}</div>
+        <div class="jugador" *ngFor="let jugador of equipo.jugadores">{{jugador}}
+            <button (click)="parcharValores(jugador)"><span class="material-symbols-outlined">edit</span></button>
+            <button (click)="borrarJugador(jugador)"><span class="material-symbols-outlined">delete</span></button>
+        </div>
     </article>
 </section>
-<section>
+<div class="formDropback" *ngIf="showForm"></div>
+<article class="listaJ formJ">
+    <button class="formToggle" (click)="toggleFormulario()"><span class="material-symbols-outlined">
+        add</span></button>
+    <form [formGroup]="formulario" *ngIf="showForm">
+        <h1 id="formTitle">Agregar jugador</h1>
+        <br>
+        <div>
+            <input type="text" placeholder="Nombre" formControlName="nombre_j">
+            <p class="error" *ngIf="notValid('nombre_j')">Falta agregar un nombre</p>
+        </div>
+        <div>
+            <input type="text" placeholder="Apellidos" formControlName="apellidos_j">
+            <p class="error" *ngIf="notValid('apellidos_j')">Falta agregar los apellidos</p>
+        </div>
+        <div>
+            <label for="fechan">Fecha de nacimiento</label>
+            <input type="date" id="fechan" formControlName="fechan_j">
+            <p class="error" *ngIf="notValid('fechan_j')">Falta agregar la fecha de nacimiento</p>
+        </div>
+        <div>
+            <label for="equipo">Equipo</label>
+            <select name="equipo" id="equipo" formControlName="ide_jq">
+                <option *ngFor="let equipo of equiposJugadores" [value]="equipo.ide_jq">{{equipo.equipo}}</option>
+            </select>
+            <p class="error" *ngIf="notValid('ide_jq')">Falta agregar el equipo del jugador</p>
+        </div>
+        <button class="sendButton" [disabled]="this.formulario.invalid" (click)="enviarDatos()" id="agregarEditar">Agregar</button>
+    </form>
+</article>
