@@ -46,7 +46,7 @@ export class PartidosComponent implements OnInit {
           arbitro: dato.arbitro, id_p: dato.id_p, id_a: dato.id_a, id_e1: equipos[0], id_e2: equipos[1]});
       });
     });    
-    this.cs.get('equipos', 'getEquipos').subscribe((data: any) => {
+    this.cs.get('partidos', 'equiposCompletos').subscribe((data: any) => {
       this.equipos = data;
     });
     this.cs.get('arbitros', 'getArbitros').subscribe((data: any) => {
@@ -65,6 +65,10 @@ export class PartidosComponent implements OnInit {
     } else {
       this.editarPartido();
     }
+  }
+
+  sinEquipos() {
+    return !this.equipos || this.equipos.length == 0;
   }
 
   agregarPartido() {

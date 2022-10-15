@@ -3,6 +3,7 @@
 <section class="partidos">
     <article class="partido">
         <form [formGroup]="formulario" class="partidoForm">
+            <p class="error" *ngIf="sinEquipos()">No hay equipos disponbiles.<br> Deben tener 11 jugadores.</p>
             <div>
                 <label for="equipo1">Equipo 1</label>
                 <select name="equipo1" id="equipo1" formControlName="id_e1">
