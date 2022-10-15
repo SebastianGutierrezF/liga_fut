@@ -90,6 +90,12 @@ export class TorneosComponent implements OnInit {
   }
 
   enviarDatos() {
+    const inicio = new Date(this.formulario.controls['fechain_t'].value);
+    const fin = new Date(this.formulario.controls['fechafin_t'].value);
+    if (inicio > fin) {
+      alert('La fecha de finalización del torneo debe ser posterior a la fecha inicio.');
+      return;
+    }
     if (this.formulario.controls['id_t'].value == null) {
       this.agregarTorneo();
     } else {
@@ -100,7 +106,7 @@ export class TorneosComponent implements OnInit {
   borrarTorneo(id_t: string) {        
     this.cs.post('torneos', 'borrarTorneo', {'id_t': id_t}).subscribe((data: any) => {
       if (data) {
-        alert(`El torneo ${this.formulario.controls['nombre'].value} ha sido borrado`);
+        alert(`El torneo ha sido borrado`);
         this.update();
         this.formulario.reset();
       } else {

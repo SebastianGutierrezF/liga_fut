@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import * as moment from 'moment';
 import { Jugador } from 'src/app/interfaces/jugador';
 import { JugadorEquipo } from 'src/app/interfaces/jugador-equipo';
 import { JugadorEquipoObj } from 'src/app/interfaces/jugador-equipo-obj';
@@ -63,8 +64,12 @@ export class JugadoresComponent implements OnInit {
   }
 
   enviarDatos() {
-    console.log(this.formulario.value);
-    
+    const fechaNac = moment(this.formulario.controls['fechan_j'].value);
+    const now = moment();
+    if (now.diff(fechaNac, 'years') < 18) {
+      alert('El jugador debe sar mayor de 18 años.');
+      return;
+    }
     if (this.formulario.controls['id_j'].value == null) {
       this.agregarJugador();
     } else {
@@ -78,6 +83,7 @@ export class JugadoresComponent implements OnInit {
         alert(`Jugador ${this.formulario.controls['nombre_j'].value} ha sido agregado.`);
         this.formulario.reset();
         this.update();
+        this.showForm = false;
       } else {
         alert(`Ocurrio un error al agregar el jugador.`);
       }
@@ -92,6 +98,7 @@ export class JugadoresComponent implements OnInit {
         this.update();
         document.getElementById('formTitle')!.textContent = "Agregar jugador";
         document.getElementById('agregarEditar')!.textContent = "Agregar";
+        this.showForm = false;
       } else {
         alert(`Ocurrio un error al editar el jugador.`)
       }
